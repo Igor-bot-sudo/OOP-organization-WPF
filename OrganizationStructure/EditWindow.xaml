@@ -1,0 +1,54 @@
+﻿<Window x:Class="OrganizationStructure.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OrganizationStructure"
+        mc:Ignorable="d"
+        Title="Редактирование отдела" Height="450" Width="800" 
+        WindowStartupLocation="CenterScreen" Activated="Window_Activated">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="60*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <Label x:Name="lblDepartment" Content="Департамент:" Margin="10,2,10,2" Height="35" FontWeight="Bold" FontSize="14"/>
+            <Label x:Name="lblDepartmentName" Content="Название отдела:" 
+                   Margin="10,2,10,2" Height="25" Visibility="Collapsed"/>
+            <Label x:Name="lblFirstName" Content="Имя:" Margin="10,2,10,2" Height="25"/>
+            <TextBox  x:Name="tbxFirstName" Margin="10,2,10,2" 
+                      Text="{Binding ElementName=lvWorkers, Path=SelectedItem.FirstName}" Height="25"/>
+            <Label x:Name="lblLastName" Content="Фамилия:" Margin="10,2,10,2" Height="25"/>
+            <TextBox x:Name="tbxLastName" Margin="10,2,10,2" 
+                      Text="{Binding ElementName=lvWorkers, Path=SelectedItem.LastName}" Height="25"/>
+            <Label x:Name="lblAge" Content="Возраст:" Margin="10,2,10,2" Height="25"/>
+            <TextBox x:Name="tbxAge" Margin="10,2,10,2" 
+                      Text="{Binding ElementName=lvWorkers, Path=SelectedItem.Age}" Height="25"/>
+            <Label x:Name="lblCategory" Content="Должность:" Margin="10,2,10,2" Height="25"/>
+            <TextBox x:Name="tbxCategory" Margin="10,2,10,2" 
+                      Text="{Binding ElementName=lvWorkers, Path=SelectedItem.Category}" Height="25"/>
+
+            <Button x:Name="btnAdd" Content="Добавить сотрудника" Margin="10,2,10,2" Click="AddWorkerButton_Click"/>
+            <Button x:Name="btnUpdate" Content="Обновить данные сотрудника"
+                    Margin="10,2,10,2" Click="btnUpdate_Click"/>
+            <Button x:Name="btnDelete" Content="Удалить данные сотрудника" Margin="10,2,10,2" Click="DeleteWorkerButton_Click"/>
+            <Button x:Name="btnDeleteDept" Content="Удалить департамент" Margin="10,2,10,2" Click="DeleteDepartmentButton_Click"/>
+        </StackPanel>
+
+        <ListView x:Name="lvWorkers" Margin="10" Grid.Column="1" 
+                  GridViewColumnHeader.Click="ColumnHeader_Click">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding FirstName}"/>
+                    <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}"/>
+                    <GridViewColumn Header="Возраст" DisplayMemberBinding="{Binding Age}"/>
+                    <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Category}"/>
+                    <GridViewColumn Header="ID отдела" DisplayMemberBinding="{Binding DepartmentID}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>
